@@ -1,20 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import os, sys
 import math
 import rospy
 from geometry_msgs.msg import Vector3
+import rospkg
+# --- Import helpers  ---
+# from antropomorphic_project.move_joints import JointMover
+# from antropomorphic_project.rviz_marker import MarkerBasics
 
-# --- Import helpers from your package (fall back to plain import if needed) ---
-try:
-    from .move_joints import JointMover
-except Exception:
-    from move_joints import JointMover
+# try:
+#     from .rviz_marker import MarkerBasics   # relative import (inside same package dir)
+# except Exception:
+#     from rviz_marker import MarkerBasics    # fallback to plain import (if run as script)
 
-try:
-    from .rviz_marker import MarkerBasics
-except Exception:
-    from rviz_marker import MarkerBasics
+# try:
+#     from .move_joints import JointMover   # relative import (inside same package dir)
+# except Exception:
+#     from move_joints import JointMover    # fallback to plain import (if run as script)
+
+# --- Force Python to import our helpers from this package's src/ ---
+_pkg_path = rospkg.RosPack().get_path('antropomorphic_project')
+_src_path = os.path.join(_pkg_path, 'src')
+if _src_path not in sys.path:
+    sys.path.insert(0, _src_path)
+
+from move_joints import JointMover
+from rviz_marker import MarkerBasics
+
 
 # /ee_pose_commands message (from the course)
 from planar_3dof_control.msg import EndEffector
