@@ -90,13 +90,14 @@ if __name__ == "__main__":
 
     i = 0
     while not rospy.is_shutdown():
-        new_pos = pos_array[i]
-        obj.move_all_joints(new_pos[0],new_pos[1],new_pos[2])
+        # new_pos = pos_array[i]
+        obj.move_all_joints(6.28*i/360,1.57,1.57)
         i += 1
-        if i==4:
+        rospy.logdebug("i=%d",i)
+        if i==360:
             i=0
         rospy.loginfo("Sleep...")
-        time.sleep(3)
+        # time.sleep(1)
         rospy.loginfo("Sleep...END")
 
     

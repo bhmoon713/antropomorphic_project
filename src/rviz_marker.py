@@ -31,7 +31,7 @@ def euler_to_quaternion(roll, pitch, yaw):
 class MarkerBasics(object):
 
     def __init__(self):
-        self.marker_objectlisher = rospy.Publisher('/ee_position', Marker, queue_size=1)
+        self.marker_objectlisher = rospy.Publisher('/ee_pose_commands', Marker, queue_size=1) #ee_pose_commands. ee_position
         
         self.init_marker(index=0)
     
